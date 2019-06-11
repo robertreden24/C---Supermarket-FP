@@ -70,10 +70,11 @@ void Carts::printBill(){
         printf("%-18s | $%-10f | %-10d | $%-10f\n", Cart[i].get_name().c_str(), Cart[i].get_price(), Cart[i].get_quantity(), total);
     }
     printf("%49c%f\n", '$', subtotal);
-    cout << "Enter amount:" << endl;
-    cin >> pay;
-    change = pay-subtotal;
     while(true){
+        cout << "Enter amount:" << endl;
+        cin >> pay;
+        change = pay-subtotal;
+    
         if(change < 0){
             cout << "invalid amount" << endl;
         }
