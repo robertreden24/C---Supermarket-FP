@@ -25,5 +25,8 @@ class Carts{
 
         //function to print the bill and checkout
         void printBill();
+
+        //function to delete all items in Cart
+        void clearCart();
 };
 #endif

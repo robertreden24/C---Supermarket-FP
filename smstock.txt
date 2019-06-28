@@ -1,0 +1,10 @@
+Milk,0.99,10
+Orange Juice,1.99,10
+Bread,1.49,10
+Carton of Eggs,1.29,10
+Instant Noodle,0.49,10
+Chips,1.39,10
+Yogurt,2.49,10
+Ice Cream,2.99,10
+Cheese,0.69,10
+Chocolate bar,1.89,10

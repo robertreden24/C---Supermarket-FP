@@ -3,11 +3,18 @@
 
 #include "Cart.cpp"
 #include "Item.cpp"
+#include "smuser.cpp"
 
 class Supermarket{
     private:
         // vector of Items object to act as supermarket
         vector<Items> Stock;
+
+        //vector of User object, store the users in the database
+        vector <User> user_list;
+
+        //vector to store all the transactions
+        vector<double> profit;
 
         //create a Cart object
         Carts Cart;
@@ -29,6 +36,12 @@ class Supermarket{
 
         //function to display items in the Supermarket
         void display(vector<Items> Stock);
+
+        //function to display all user in the database
+        void displayUser(vector<User> user_list);
+
+        //getter funtion to return total profit
+        double getProfit();
 
     public:
         //function to simulate the online supermarket experience
