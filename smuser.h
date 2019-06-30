@@ -6,19 +6,10 @@ class User{
         //user variables
         string username, password;
     public:
-        //constructor for user object
         User(string un, string pass);
-
-        //setter function for User's username
         void setUsername(string un);
-
-        //setter function for User's password
         void setPassword(string pass);
-
-        //getter function for User's username
         string getUsername();
-
-        //getter function for User's password
         string getPassword();
 };
 

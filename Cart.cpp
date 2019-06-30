@@ -1,13 +1,16 @@
 #include "Cart.h"
 
+//Cart constructor
 Carts::Carts(){
 
 }
 
+//function to delete all items in Cart
 void Carts::clearCart(){
     Cart.clear();
 }
 
+//function to add an item into the cart
 void Carts::addToCart(int po, int q, vector<Items> ss){
     Items s = ss[po-1];
     bool found = false;
@@ -26,6 +29,7 @@ void Carts::addToCart(int po, int q, vector<Items> ss){
     }
 }
 
+//function to remove an item from the cart
 void Carts::removeFromCart(int po,int q){
     bool found = false;
     int check = Cart[po-1].get_quantity() - q;
@@ -56,6 +60,7 @@ void Carts::removeFromCart(int po,int q){
     }
 }
 
+//funciton to display the items in the cart
 void Carts::displayCart(){
     cout << "============================" << endl
          << "Cart" << endl
@@ -67,17 +72,19 @@ void Carts::displayCart(){
     }
 }
 
+//getter function to return the Cart vector
 vector<Items> Carts::getCart(){
     return Cart;
 }
 
+//function to print the bill and checkout
 void Carts::printBill(){
     double total, pay, change;
     double subtotal = 0;
     cout << "==========================================================" << endl
          << "Product              " << "Price         " << "Quantity     " << "Total" << endl
          << "==========================================================" << endl;
-    //calculate the total price of items(quantity*price) and subtotal(total price of all items)
+    //print and calculate the total price of items(quantity*price) and subtotal(total price of all items)
     for(int i = 0; i < Cart.size(); i++){
         total = Cart[i].get_price() * Cart[i].get_quantity();
         subtotal += Cart[i].get_price() * Cart[i].get_quantity();
@@ -87,12 +94,13 @@ void Carts::printBill(){
     while(true){
         cout << "Enter amount:" << endl;
         cin >> pay;
+        //double change is customer pay - bill
         change = pay-subtotal;
         //if amount paid is less than the bill
         if(change < 0){
             cout << "invalid amount" << endl;
         }
-        //billing successful
+        //transaction is successful
         else{
             printf("%48s%c%f\n", "Change: ", '$', change);
             cout << "\n==========================================================" << endl
