@@ -115,14 +115,14 @@ void Supermarket::sm_option(){
                                 cout << "Cart is empty" << endl;
                                 continue;
                             }
-                            sm_checkout();
                             double total, subtotal = 0;
                             //add the billing total to the profit vector
                             for(int i = 0; i < Cart.getCart().size(); i++){
                                 total = Cart.getCart()[i].get_price() * Cart.getCart()[i].get_quantity();
                                 subtotal += Cart.getCart()[i].get_price() * Cart.getCart()[i].get_quantity();
-                                profit.push_back(subtotal);
                             }
+                            profit.push_back(subtotal);
+                            sm_checkout();
                             //clear contents in Cart
                             Cart.clearCart();
                             login2 = true;
