@@ -27,6 +27,7 @@ class Supermarket{
         void display(vector<Items> Stock);
         void displayUser(vector<User> user_list);
         double getProfit();
+        void appendToFile(string text,string filename);
 
     public:
         void run_sm();

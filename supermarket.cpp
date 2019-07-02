@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <stdlib.h>
+#include <iostream>
+#include <iomanip>
 
 //function to display items in the Supermarket
 void Supermarket::display(vector<Items> Stock){
@@ -63,6 +65,7 @@ void Supermarket::sm_option(){
                 for(int i = 0; i < user_list.size(); i++){
                     //if username and password is matched in user database
                     if((user_list[i].getUsername() == username) && (user_list[i].getPassword() == password)){
+                        cout << "Login is successful" << endl;
                         found = true;
                         login = true;
                     }
@@ -161,7 +164,8 @@ void Supermarket::sm_option(){
                         cout << "===========================" << endl
                              << "1. View Total Profit" << endl
                              << "2. View Supermarket Stock" << endl
-                             << "3. Exit" << endl
+                             << "3. Add New Product to Stock" << endl
+                             << "4. Exit" << endl
                              << "===========================" << endl;
                         cin >> opt3;
                         if(opt3 == 1){
@@ -179,11 +183,41 @@ void Supermarket::sm_option(){
                             cout << "================================================" << endl;
                         }
                         else if(opt3 == 3){
+                            string npname;
+                            double npprice;
+                            int npquantity;
+                            bool foundInStock = false, addNewProduct = false;
+                            while(addNewProduct == false){
+                                cout << "Name of New Product: " << endl;
+                                cin >> npname;
+                                cout << "Price of New Product: " << endl;
+                                cin >> npprice;
+                                cout << "Quantity of New Product: " << endl;
+                                cin >> npquantity;
+                                string npdata = npname + ',' + to_string(npprice) + ',' + to_string(npquantity);
+                                for(int i = 0; i < Stock.size(); i++){
+                                    if(Stock[i].get_name() == npname){
+                                        foundInStock = true;
+                                        cout << "Item is already in Stock" << endl;
+                                        break;
+                                    }
+                                }
+
+                                if(foundInStock == false){
+                                    Stock.push_back(Items(npname, npprice, npquantity));
+                                    appendToFile(npdata, "downloads/smstock.txt");
+                                    addNewProduct = true;
+                                    break;
+                                }
+                            }
+
+                        }
+                        else if(opt3 == 4){
                             login2 = true;
                             break;
                         }
                         else{
-                            cout << "Incorrect Input(1-3)" << endl;
+                            cout << "Incorrect Input(1-4)" << endl;
                         }
                     }
 
@@ -222,6 +256,8 @@ void Supermarket::sm_option(){
                     //if password confirmation succeeds
                     if(password == password2){
                         user_list.push_back(User(username, password));
+                        string userdata = username + ',' + password;
+                        appendToFile(userdata, "downloads/userdatabase.txt");
                         regis = true;
                     }
                     //if password confirmation fails
@@ -233,6 +269,7 @@ void Supermarket::sm_option(){
             }
         }
         else if(opt1 == 3){
+            appendToFile(to_string(getProfit()), "downloads/totalprofit.txt");
             break;
         }
         else{
@@ -408,4 +445,13 @@ void Supermarket::run_sm(){
     sm_stock();
     //simulate online supermarket experience
     sm_option();
+}
+
+//function to append data to txt file
+void Supermarket::appendToFile(string text, string filename){
+    string line;
+    ofstream myfile;
+    myfile.open(filename, ios::out | ios::app);
+    myfile << text << endl;
+    myfile.close();
 }
