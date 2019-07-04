@@ -202,6 +202,10 @@ void Supermarket::sm_option(){
                                         break;
                                     }
                                 }
+                                if(npprice <= 0 || npquantity <= 0){
+                                    cout << "Invalid price or quantity" << endl;
+                                    continue;
+                                }
 
                                 if(foundInStock == false){
                                     Stock.push_back(Items(npname, npprice, npquantity));
@@ -210,7 +214,6 @@ void Supermarket::sm_option(){
                                     break;
                                 }
                             }
-
                         }
                         else if(opt3 == 4){
                             login2 = true;
